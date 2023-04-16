@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "74BGeNNfQsLbt/bORVOARWjUu86cTW5veit2Rj7qvpcyQIl/pGBKZvgWp/Ejb4YICybB+nUvQGMDY3RM2HcxKw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\trucq\\Desktop\\Project-DataStructures-NewsOutlet-main\\NewsOutlet.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\trucq\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

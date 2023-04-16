@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\net6.0\MOCK_DATA.json" />
+    <Content Include="bin\Debug\net6.0\NewsOutlet.deps.json" />
+    <Content Include="bin\Debug\net6.0\NewsOutlet.runtimeconfig.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\net6.0\NewsOutlet.dll" />
+    <None Include="bin\Debug\net6.0\NewsOutlet.exe" />
+    <None Include="bin\Debug\net6.0\NewsOutlet.pdb" />
+    <None Include="bin\Debug\net6.0\Newtonsoft.Json.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+</Project>
