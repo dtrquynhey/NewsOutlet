@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\trucq\\Desktop\\Project-DataStructures-NewsOutlet-main\\NewsOutlet.csproj": {}
+    "C:\\Users\\hajha\\source\\repos\\Project-DataStructures-NewsOutlet-Updated\\NewsOutlet.csproj": {}
   },
   "projects": {
-    "C:\\Users\\trucq\\Desktop\\Project-DataStructures-NewsOutlet-main\\NewsOutlet.csproj": {
+    "C:\\Users\\hajha\\source\\repos\\Project-DataStructures-NewsOutlet-Updated\\NewsOutlet.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\trucq\\Desktop\\Project-DataStructures-NewsOutlet-main\\NewsOutlet.csproj",
+        "projectUniqueName": "C:\\Users\\hajha\\source\\repos\\Project-DataStructures-NewsOutlet-Updated\\NewsOutlet.csproj",
         "projectName": "NewsOutlet",
-        "projectPath": "C:\\Users\\trucq\\Desktop\\Project-DataStructures-NewsOutlet-main\\NewsOutlet.csproj",
-        "packagesPath": "C:\\Users\\trucq\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\trucq\\Desktop\\Project-DataStructures-NewsOutlet-main\\obj\\",
+        "projectPath": "C:\\Users\\hajha\\source\\repos\\Project-DataStructures-NewsOutlet-Updated\\NewsOutlet.csproj",
+        "packagesPath": "C:\\Users\\hajha\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\hajha\\source\\repos\\Project-DataStructures-NewsOutlet-Updated\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\trucq\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\hajha\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -65,7 +65,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     }

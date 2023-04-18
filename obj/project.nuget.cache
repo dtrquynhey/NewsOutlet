@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "74BGeNNfQsLbt/bORVOARWjUu86cTW5veit2Rj7qvpcyQIl/pGBKZvgWp/Ejb4YICybB+nUvQGMDY3RM2HcxKw==",
+  "dgSpecHash": "gb4ngyNQXU7WDiJOgs8Z2Mij/wa9hXe10I04GlYAjq8MbCtvlk3+OpzwTcigrz02Z698sQHbx9ChZWe4CroCIw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\trucq\\Desktop\\Project-DataStructures-NewsOutlet-main\\NewsOutlet.csproj",
+  "projectFilePath": "C:\\Users\\hajha\\source\\repos\\Project-DataStructures-NewsOutlet-Updated\\NewsOutlet.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\trucq\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+    "C:\\Users\\hajha\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
   ],
   "logs": []
 }

@@ -18,7 +18,7 @@ namespace NewsOutlet.basisClasses
         public Dictionary<int, News>? dictOfNewsByTrend = filesProcess.ReadFile("newsByTrend.json");
 
         //Dictionary of the latest 500 news
-        public Dictionary<int, News>? dictOfNewsByTime = filesProcess.ReadFile("newsByTime.json");
+        public Dictionary<int, News>? dictOfNewsByTime = fillDictNewsByTime();
 
         //PriorityQueue for the trending news
         public PriorityQueue<News, int>? pQueueOfNewsByTrend = new PriorityQueue<News, int>();
@@ -26,6 +26,11 @@ namespace NewsOutlet.basisClasses
         //Stack to review the selected news
         public Stack<int> selectedNews = new Stack<int>();
 
+       
+        public static Dictionary<int, News> fillDictNewsByTime()
+        {
+            return filesProcess.ReadFile("newsByTime.json");
+        }
 
 
         public void fillPQueue()
@@ -42,7 +47,6 @@ namespace NewsOutlet.basisClasses
                 }
 
             }
-
         }
 
         public void fillDictionary()
@@ -108,13 +112,14 @@ namespace NewsOutlet.basisClasses
         }
 
         // SHOW RECENT
+        
         public void displayRecentNews()
         {
             if (dictOfNewsByTime != null)
             {
                 foreach (News news in dictOfNewsByTime.Values)
                 {
-                    Console.WriteLine(news);
+                        Console.WriteLine(news);   
                 }
             }
         }

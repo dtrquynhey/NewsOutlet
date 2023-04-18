@@ -16,12 +16,16 @@ namespace NewsOutlet
             dataManagement.fillPQueue();
             dataManagement.fillDictionary();
             bool exit = false;
-            long unixEpoch;
+            //DateTime now = DateTime.Now;
+            //long unixEpoch = dataManagement.convertToUnixEpoch(DateTime.Now);
 
+
+            
             Console.WriteLine("\n\tWelcome to NEWSOUTLET!");
 
             while (!exit)
             {
+                Console.WriteLine("\t\tSysTime > " + filesProcess.sysDate);
                 Console.WriteLine("\n\t\tMAIN MENU");
                 Console.WriteLine("\t1 - SHOW RECENT");
                 Console.WriteLine("\t2 - SHOW TRENDING");
@@ -87,7 +91,9 @@ namespace NewsOutlet
                         dataManagement.displayAllNews();
                         break;
                     case 6:
-                        askTime();
+                        filesProcess.sysDate = askTime();
+                        filesProcess.ResetNewsFileByTime();
+                        DataManagement.fillDictNewsByTime();
                         break;
                     default:
                         exit = true;
@@ -125,14 +131,17 @@ namespace NewsOutlet
             return new string[0];
         }
 
-        private static void askTime()
+        private static DateTime askTime()
         {
             Console.WriteLine("System Current Time now > " + DateTime.Now);
             Console.Write("Please enter the time to set (yyyy-MM-dd HH:mm:ss) > ");
             string? dateString = Console.ReadLine();
-            DateTime dateTime = DateTime.ParseExact(dateString, "yyyy-MM-dd HH:mm:ss", null);
-            DateTimeSetter.SetTime(dateTime);
-            Console.WriteLine("Updated Time > " + DateTime.Now);
+            DateTime desiredTime = DateTime.ParseExact(dateString, "yyyy-MM-dd HH:mm:ss", null);
+            Console.WriteLine("Updated Time > " + desiredTime);
+            return desiredTime;
+
+          
+            
             //return DateTimeProvider.convertToUnixEpoch(dateTime);
         }
     }

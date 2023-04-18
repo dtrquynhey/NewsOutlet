@@ -14,18 +14,40 @@ namespace NewsOutlet.basisClasses
 {
     class FilesProcess
     {
-
+       
         public PriorityQueue<News, long> pQueueRecent = new PriorityQueue<News, long>();
         public PriorityQueue<News, int> pQueueTrend = new PriorityQueue<News, int>();
+        Dictionary<int, News> dictOfNews = new Dictionary<int, News>();
+
+        //SysDate
+        public DateTime sysDate = DateTime.Now;
 
         public void CreateSubJsonFiles()
         {
-            Dictionary<int, News> dictOfNews = ReadFile("MOCK_DATA.json");
+            dictOfNews = ReadFile("MOCK_DATA.json");
             FillPQueueTrend(dictOfNews);
             FillPQueueRecent(dictOfNews);
 
             CreateNewsFileByTrend();
             CreateNewsFileByTime();
+        }
+
+
+        public long convertToUnixEpoch(DateTime dateTimeToBeConverted)
+        {
+            TimeSpan timeSpan = dateTimeToBeConverted - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+            return (long)timeSpan.TotalSeconds;
+        }
+
+        public bool last24HoursNews(News news)
+        {
+            long nowTimestamp = convertToUnixEpoch(sysDate);
+            long differenceInHours = Math.Abs(nowTimestamp - news.Time) / 3600;
+            if (differenceInHours <= 24)
+            {
+                return true;
+            }
+            return false;
         }
 
         public void FillPQueueTrend(Dictionary<int, News> dictTrend)
@@ -42,14 +64,19 @@ namespace NewsOutlet.basisClasses
         /// <param name="dictRecent"></param>
         public void FillPQueueRecent(Dictionary<int, News> dictRecent)
         {
+            pQueueRecent.Clear();
             foreach (News val in dictRecent.Values)
             {
-                pQueueRecent.Enqueue(val, -val.Time);
+                if (last24HoursNews(val))
+                {
+                    Console.WriteLine(val);
+                    pQueueRecent.Enqueue(val, -val.Time);
+                }
             }
 
         }
 
-        public Dictionary<int, News> ReadFile(string path)
+        public  Dictionary<int, News> ReadFile(string path)
         {
             //List<News> allNews = new List<News>();
             Dictionary<int, News> allNews = new Dictionary<int, News>();
@@ -147,7 +174,16 @@ namespace NewsOutlet.basisClasses
             }
         }
 
-
+        public void ResetNewsFileByTime()
+        {
+            string fileName = "newsByTime.json";
+            if (File.Exists(fileName))
+            {
+                File.Delete(fileName);
+            }
+            FillPQueueRecent(dictOfNews);
+            CreateNewsFileByTime();
+        }
 
     }
 }
