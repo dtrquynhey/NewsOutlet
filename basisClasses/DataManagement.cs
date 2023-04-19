@@ -11,14 +11,14 @@ namespace NewsOutlet.basisClasses
     {
         static FilesProcess filesProcess = new FilesProcess();
 
-        //Dictionary of all the news we load
+        //Dictionary of all the news we load(the two sub files)
         public Dictionary<int, News>? dictOfAllNews = new Dictionary<int, News>();
 
-        //Dictionary of the 500 news that have the most hits
+        //Dictionary of the 10 news that have the most hits
         public Dictionary<int, News>? dictOfNewsByTrend = filesProcess.ReadFile("newsByTrend.json");
 
-        //Dictionary of the latest 500 news
-        public Dictionary<int, News>? dictOfNewsByTime = fillDictNewsByTime();
+        //Dictionary of the latest 10 news
+        public Dictionary<int, News>? dictOfNewsByTime = filesProcess.ReadFile("newsByTime.json")/*FillDictNewsByTime()*/;
 
         //PriorityQueue for the trending news
         public PriorityQueue<News, int>? pQueueOfNewsByTrend = new PriorityQueue<News, int>();
@@ -26,14 +26,14 @@ namespace NewsOutlet.basisClasses
         //Stack to review the selected news
         public Stack<int> selectedNews = new Stack<int>();
 
-       
-        public static Dictionary<int, News> fillDictNewsByTime()
+        //Fill the dictinaryNewsByTime by reading from the file
+        public void FillDictNewsByTime() // O(n)
         {
-            return filesProcess.ReadFile("newsByTime.json");
+            dictOfNewsByTime =  filesProcess.ReadFile("newsByTime.json");
         }
 
-
-        public void fillPQueue()
+        //Fill the PQueue of trending news from the sub file newsByTrend
+        public void FillPQueue() // O(n log n)
         {
             if (pQueueOfNewsByTrend != null)
             {
@@ -45,20 +45,20 @@ namespace NewsOutlet.basisClasses
                         pQueueOfNewsByTrend.Enqueue(news, -news.Hits);
                     }
                 }
-
             }
         }
 
-        public void fillDictionary()
+        //Fill the Dictionary of all news from the sub files
+        public void FillDictionary() // O(n + m)
         {
             if (dictOfNewsByTrend != null && dictOfAllNews != null && dictOfNewsByTime != null)
             {
-                foreach (var item in dictOfNewsByTrend.Values)
+                foreach (var item in dictOfNewsByTrend.Values) //O(n)
                 {
-                    dictOfAllNews.Add(item.ID, new News(item));
+                    dictOfAllNews.Add(item.ID, new News(item)); // O(1)
 
                 }
-                foreach (var item in dictOfNewsByTime.Values)
+                foreach (var item in dictOfNewsByTime.Values) //O(m)
                 {
                     if (!dictOfAllNews.ContainsKey(item.ID))
                     {
@@ -68,21 +68,8 @@ namespace NewsOutlet.basisClasses
             }
         }
 
-        public void pushNewsToStack(int id)
-        {
-            selectedNews.Push(id);
-        }
-
-        public int popNewsFromStack()
-        {
-            if (selectedNews.Count > 0)
-            {
-                return selectedNews.Pop();
-            }
-            return -1;
-        }
-
-        private void updateDict(int id)
+        //Update the hits of news in all the data structures
+        private void UpdateDict(int id) // O(n log n)
         {
             if (dictOfAllNews != null && dictOfNewsByTrend != null && dictOfNewsByTime != null)
             {
@@ -95,59 +82,66 @@ namespace NewsOutlet.basisClasses
                 {
                     dictOfNewsByTime[id].Hits = newHits;
                 }
-               
             }
-
-            fillPQueue();
+            FillPQueue(); // O(n log n)
         }
 
         // SELECT
-        public void Select(int id)
+        public void Select(int id) // O(n log n)
         {
-                News news = dictOfAllNews[id];
-                dictOfAllNews[id].Hits += 1;
-                updateDict(id);
-                showContent(news);
-           
+            News news = dictOfAllNews[id];
+            dictOfAllNews[id].Hits += 1;
+            UpdateDict(id); // O(n log n)
+            ShowContent(news);
+        }
+
+        public void PushNewsToStack(int id) //O(1)
+        {
+            selectedNews.Push(id);
+        }
+
+        public int PopNewsFromStack() //O(1)
+        {
+            if (selectedNews.Count > 0)
+            {
+                return selectedNews.Pop();
+            }
+            return -1;
         }
 
         // SHOW RECENT
-        
-        public void displayRecentNews()
+        public void DisplayRecentNews() //O(n)
         {
             if (dictOfNewsByTime != null)
             {
                 foreach (News news in dictOfNewsByTime.Values)
                 {
-                        Console.WriteLine(news);   
+                    Console.WriteLine(news);
                 }
             }
         }
 
-        public void displayRecentNewsByKeywords(string[] keywords)
+        public void DisplayRecentNewsByKeywords(string[] keywords) // O(nm)
         {
             string allNews = "";
             if (dictOfNewsByTime != null)
             {
-                foreach (News news in dictOfNewsByTime.Values)
+                foreach (News news in dictOfNewsByTime.Values)// O(n)
                 {
-
-                    for (int i = 0; i < keywords.Length; i++)
+                    for (int i = 0; i < keywords.Length; i++)// O(m)
                     {
                         if (news.Keywords.Contains(keywords[i]))
                         {
                             allNews += news.ToString() + "\n";
-
                         }
                     }
                 }
             }
-            Console.WriteLine(allNews); 
+            Console.WriteLine(allNews);
         }
 
-
         // SHOW TREND
-        public void displayTrendNews()
+        public void DisplayTrendNews() //O(n log n)
         {
             if (pQueueOfNewsByTrend != null)
             {
@@ -156,23 +150,21 @@ namespace NewsOutlet.basisClasses
                     Console.WriteLine(pQueueOfNewsByTrend.Dequeue());
                 }
             }
-
         }
 
-        public void displayTrendNewsByKeywords(string[] keywords)
+        public void DisplayTrendNewsByKeywords(string[] keywords) //O(nm log n)
         {
             string allNews = "";
-            if (dictOfNewsByTrend != null)
+            if (pQueueOfNewsByTrend != null)
             {
-                foreach (News news in dictOfNewsByTrend.Values)
+                while (pQueueOfNewsByTrend.Count > 0)
                 {
-
                     for (int i = 0; i < keywords.Length; i++)
                     {
-                        if (news.Keywords.Contains(keywords[i]))
+                        News currentNews = pQueueOfNewsByTrend.Dequeue();
+                        if (currentNews.Keywords.Contains(keywords[i]))
                         {
-                            allNews += news.ToString() + "\n";
-
+                            allNews += currentNews.ToString() + "\n";
                         }
                     }
                 }
@@ -180,7 +172,7 @@ namespace NewsOutlet.basisClasses
             Console.WriteLine(allNews);
         }
 
-        public void displayAllNews()
+        public void DisplayAllNews() // O(n)
         {
             if (dictOfAllNews != null)
             {
@@ -191,9 +183,9 @@ namespace NewsOutlet.basisClasses
             }
         }
 
-        public void showContent(News news)
+        public void ShowContent(News news) // O(1)
         {
-            Console.WriteLine("--> News Info " + news.ToString() + "\nContent: " + news.Content); 
+            Console.WriteLine("--> News Info " + news.ToString() + "\nContent: " + news.Content);
         }
     }
 }

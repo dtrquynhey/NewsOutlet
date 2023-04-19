@@ -13,8 +13,8 @@ namespace NewsOutlet
             FilesProcess filesProcess = new FilesProcess();
             filesProcess.CreateSubJsonFiles();
             DataManagement dataManagement = new DataManagement();
-            dataManagement.fillPQueue();
-            dataManagement.fillDictionary();
+            dataManagement.FillPQueue();
+            dataManagement.FillDictionary();
             bool exit = false;
             //DateTime now = DateTime.Now;
             //long unixEpoch = dataManagement.convertToUnixEpoch(DateTime.Now);
@@ -25,7 +25,7 @@ namespace NewsOutlet
 
             while (!exit)
             {
-                Console.WriteLine("\t\tSysTime > " + filesProcess.sysDate);
+                Console.WriteLine("\tSysTime > " + filesProcess.sysDate);
                 Console.WriteLine("\n\t\tMAIN MENU");
                 Console.WriteLine("\t1 - SHOW RECENT");
                 Console.WriteLine("\t2 - SHOW TRENDING");
@@ -45,11 +45,11 @@ namespace NewsOutlet
                         Console.WriteLine("\n +++++++ RECENT NEWS +++++++ ");
                         if (keywordsRecent.Length > 0)
                         {
-                            dataManagement.displayRecentNewsByKeywords(keywordsRecent);
+                            dataManagement.DisplayRecentNewsByKeywords(keywordsRecent);
                         }
                         else
                         {
-                            dataManagement.displayRecentNews();
+                            dataManagement.DisplayRecentNews();
                         }
                         break;
                     case 2:
@@ -57,13 +57,13 @@ namespace NewsOutlet
                         Console.WriteLine("\n +++++++ TRENDING NEWS +++++++ ");
                         if (keywordsTrending.Length > 0)
                         {
-                            dataManagement.displayRecentNewsByKeywords(keywordsTrending);
+                            dataManagement.DisplayTrendNewsByKeywords(keywordsTrending);
                         }
                         else
                         {
-                            dataManagement.displayTrendNews();
+                            dataManagement.DisplayTrendNews();
                         }
-                        dataManagement.fillPQueue();
+                        dataManagement.FillPQueue();
                         break;
                     case 3:
                         Console.Write("Please enter the newsID you want to select > ");
@@ -71,7 +71,7 @@ namespace NewsOutlet
                         if (dataManagement.dictOfAllNews.ContainsKey(id))
                         {
                             dataManagement.Select(id);
-                            dataManagement.pushNewsToStack(id);
+                            dataManagement.PushNewsToStack(id);
                         }
                         else
                         {
@@ -79,7 +79,7 @@ namespace NewsOutlet
                         }
                         break;
                     case 4:
-                        int prevId = dataManagement.popNewsFromStack();
+                        int prevId = dataManagement.PopNewsFromStack();
                         if (prevId == -1)
                         {
                             break;
@@ -88,12 +88,12 @@ namespace NewsOutlet
                         break;
                     case 5:
                         Console.WriteLine("\n +++++++ ALL NEWS +++++++");
-                        dataManagement.displayAllNews();
+                        dataManagement.DisplayAllNews();
                         break;
                     case 6:
                         filesProcess.sysDate = askTime();
                         filesProcess.ResetNewsFileByTime();
-                        DataManagement.fillDictNewsByTime();
+                        dataManagement.FillDictNewsByTime();
                         break;
                     default:
                         exit = true;
@@ -136,13 +136,13 @@ namespace NewsOutlet
             Console.WriteLine("System Current Time now > " + DateTime.Now);
             Console.Write("Please enter the time to set (yyyy-MM-dd HH:mm:ss) > ");
             string? dateString = Console.ReadLine();
-            DateTime desiredTime = DateTime.ParseExact(dateString, "yyyy-MM-dd HH:mm:ss", null);
-            Console.WriteLine("Updated Time > " + desiredTime);
-            return desiredTime;
-
-          
-            
-            //return DateTimeProvider.convertToUnixEpoch(dateTime);
+            if (dateString != null)
+            {
+                DateTime desiredTime = DateTime.ParseExact(dateString, "yyyy-MM-dd HH:mm:ss", null);
+                Console.WriteLine("Updated Time > " + desiredTime);
+                return desiredTime;
+            }
+            return DateTime.Now;
         }
     }
 
