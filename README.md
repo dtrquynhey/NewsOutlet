@@ -12,8 +12,9 @@ News Outlet Software is a data-driven application designed for processing news d
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
 - [Usage](#usage)
+  - [Importing Mock Data](#importing-mock-data)
   - [Running the Application](#running-the-application)
-  - [Interacting with the Software](#interacting-with-the-software)
+  - [Commands](#commands)
 - [Project Structure](#project-structure)
 - [License](#license)
 - [Acknowledgements](#acknowledgements)
@@ -49,25 +50,41 @@ git clone <repository-url>
 ## Usage
 <a name="usage"></a>
 
+### Importing Mock Data
+<a name="importing-mock-data"></a>
+To use the application with sample data, follow these steps:
+1. Download the `.JSON` data file you want to use.
+2. Place the `.JSON` data file in the `bin/Debug` directory of the project.
+
 ### Running the Application
 <a name="running-the-application"></a>
 1. Open your C# Integrated Development Environment (IDE) like Visual Studio.
 2. Load the project within your IDE.
 3. Compile and run the application using your IDE's built-in tools.
-
-### Interacting with the Software
-<a name="interacting-with-the-software"></a>
 The application expects news data to be provided in JSON format. It will process this data and allow users to search and interact with news content.
+
+### Commands
+<a name="commands"></a>
+Once the application is running, you can use the following commands in the command-line interface:
+- `Show Recent News`: Displays recent news articles.
+- `Show Trending News`: Displays trending news articles.
+- `Select News`: Select a news article to read.
+- `Go Back`: Return to the previously selected news article.
+- `Display All News`: Shows all available news articles.
+- `Set System Time`: Set the system time to simulate viewing articles published in the last 24 hours.
+- `Exit`: Exit the application.
+- 
+When prompted, you can filter news articles by keywords. Separate multiple keywords with commas.
 
 
 ## Project Structure
 <a name="project-structure"></a>
-The project directory is structured as follows:
-- `src/`: Contains the source code and application files.
-- `data/`: Directory for storing JSON news data.
-- `json-data.json`: Example JSON data file (you can add more).
-- `bin/`: Executable files.
-- Other project files and directories.
+The core directories within this project include:
+- `basisClasses/`: Directory containing core classes
+  - `DataManagement.cs`: News data management class
+  - `FilesProcess.cs`: File processing and data structures class
+  - `News.cs`: News class
+- `Program.cs`: Main program file
 
 
 ## License
