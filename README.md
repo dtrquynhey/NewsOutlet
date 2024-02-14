@@ -70,7 +70,6 @@ Once the application is running, you can use the following commands in the comma
 - `Display All News`: Shows all available news articles.
 - `Set System Time`: Set the system time to simulate viewing articles published in the last 24 hours.
 - `Exit`: Exit the application.
-- 
 When prompted, you can filter news articles by keywords. Separate multiple keywords with commas.
 
 
@@ -82,12 +81,7 @@ The core directories within this project include:
   - `FilesProcess.cs`: File processing and data structures class
   - `News.cs`: News class
 - `Program.cs`: Main program file
-
-
-## License
-<a name="license"></a>
-This project is licensed under the MIT License - see the LICENSE file for details.
-
+  
 
 ## Acknowledgments
 <a name="acknowledgements"></a>
