@@ -1,8 +1,5 @@
 # News Outlet Software
 
-Winter 2023 LaSalle College - Data Structures - Final Project
-
-
 News Outlet Software is a data-driven application designed for processing news data in JSON format. This software allows users to interact with a console-based interface for efficient news content management and user-friendly news consumption. It employs diverse data structures for streamlined data management.
 
 
